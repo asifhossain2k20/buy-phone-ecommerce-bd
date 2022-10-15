@@ -34,16 +34,30 @@ const displayPhone=phones=>{
             <p class="card-text">${phone.slug}</p>
             </div>
         </div>
-        
         `
         phoneContainer.appendChild(phoneDiv)
     });
+
+    //stop spinner
+    toggleSpinner(false);
 }
 
 document.getElementById('btn-search').addEventListener('click',function(){
+    //start loader
+    toggleSpinner(true);
     const inputField=document.getElementById('input-field');
     const searchValue=inputField.value;
     loadPhone(searchValue);
 })
 
-loadPhone()
+const toggleSpinner=isLoading=>{
+    const loaderSection=document.getElementById('loader');
+    if(isLoading){
+        loaderSection.classList.remove('d-none')
+    }
+    else{
+        loaderSection.classList.add('d-none');
+    }
+}
+
+loadPhone('')
